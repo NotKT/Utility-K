@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "utilityk",
+	"version": "${version}",
+
+	"name": "Utility-K",
+	"description": "A standalone movement/utility hack mod for Fabric.",
+	"authors": [
+		"NotKT"
+	],
+	"contact": {
+		"sources": "https://github.com/NotKT/Utility-K"
+	},
+
+	"license": "CC0-1.0",
+
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"com.notkt.utilityk.UtilityK"
+		],
+		"client": [
+			"com.notkt.utilityk.UtilityKClient"
+		]
+	},
+
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~26.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
