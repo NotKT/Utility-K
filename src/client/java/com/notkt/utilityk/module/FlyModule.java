@@ -114,7 +114,7 @@ public class FlyModule implements Module {
 	// Plain creative-style flight: vanilla's own movement code handles this once
 	// flying=true is set above, so nothing extra needed here besides speed.
 	private void tickVanilla(LocalPlayer player) {
-		player.getAbilities().flyingSpeed = (float) (0.05D * speed);
+		player.getAbilities().setFlyingSpeed((float) (0.05D * speed));
 	}
 
 	// Simulated elytra: thrust forward along the look vector, no real elytra needed.
