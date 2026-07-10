@@ -5,14 +5,16 @@ import com.notkt.utilityk.gui.UtilityMenuScreen;
 import com.notkt.utilityk.module.ModuleManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class UtilityKClient implements ClientModInitializer {
 
-	private static final String CATEGORY = "key.category.utilityk";
+	private static final KeyMapping.Category CATEGORY =
+			KeyMapping.Category.register(Identifier.fromNamespaceAndPath("utilityk", "controls"));
 
 	private static KeyMapping flyToggleKey;
 	private static KeyMapping flyModeKey;
@@ -32,7 +34,7 @@ public class UtilityKClient implements ClientModInitializer {
 	}
 
 	private KeyMapping registerKey(String translationKey, int glfwKey) {
-		return KeyBindingHelper.registerKeyBinding(new KeyMapping(
+		return KeyMappingHelper.registerKeyMapping(new KeyMapping(
 				translationKey,
 				InputConstants.Type.KEYSYM,
 				glfwKey,
