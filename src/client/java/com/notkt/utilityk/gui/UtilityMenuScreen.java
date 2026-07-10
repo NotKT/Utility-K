@@ -2,7 +2,7 @@ package com.notkt.utilityk.gui;
 
 import com.notkt.utilityk.module.FlyModule;
 import com.notkt.utilityk.module.ModuleManager;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -12,9 +12,6 @@ public class UtilityMenuScreen extends Screen {
 	private static final int ROW_HEIGHT = 22;
 	private static final int BUTTON_WIDTH = 160;
 	private static final int BUTTON_HEIGHT = 20;
-
-	private Button flyToggleButton;
-	private Button flyModeButton;
 
 	public UtilityMenuScreen() {
 		super(Component.literal("Utility-K"));
@@ -27,7 +24,7 @@ public class UtilityMenuScreen extends Screen {
 
 		FlyModule fly = ModuleManager.FLY;
 
-		flyToggleButton = Button.builder(flyToggleLabel(fly), button -> {
+		Button flyToggleButton = Button.builder(flyToggleLabel(fly), button -> {
 					fly.toggle();
 					button.setMessage(flyToggleLabel(fly));
 				})
@@ -35,7 +32,7 @@ public class UtilityMenuScreen extends Screen {
 				.build();
 		this.addRenderableWidget(flyToggleButton);
 
-		flyModeButton = Button.builder(flyModeLabel(fly), button -> {
+		Button flyModeButton = Button.builder(flyModeLabel(fly), button -> {
 					fly.cycleMode();
 					button.setMessage(flyModeLabel(fly));
 				})
@@ -57,10 +54,12 @@ public class UtilityMenuScreen extends Screen {
 	}
 
 	@Override
-	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-		this.renderBackground(graphics, mouseX, mouseY, partialTick);
-		super.render(graphics, mouseX, mouseY, partialTick);
-		graphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - 60, 0xFFFFFF);
+	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+		super.extractRenderState(graphics, mouseX, mouseY, partialTick);
+
+		String titleText = this.title.getString();
+		int textWidth = this.font.width(titleText);
+		graphics.text(this.font, titleText, this.width / 2 - textWidth / 2, this.height / 2 - 60, 0xFFFFFFFF, true);
 	}
 
 	@Override
